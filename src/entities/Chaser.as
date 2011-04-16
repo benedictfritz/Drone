@@ -6,6 +6,7 @@ package entities
 	import net.flashpunk.graphics.Image;
 	
 	import worlds.ParticleWorld;
+	import util.Util;
 	
 	public class Chaser extends Entity
 	{	
@@ -22,13 +23,7 @@ package entities
 		{
 			this.x = x;
 			this.y = y;
-			_speed = 1;
-			
-			/*
-			var test:Block = new Block();
-			test.init(400, 300);
-			FP.world.add(test);
-			*/
+			_speed = 2;
 		}
 		
 		override public function update():void
@@ -56,9 +51,7 @@ package entities
 			var xPos:Number = x - playerX;
 			var yPos:Number = y - playerY;
 			
-			var xDis:Number = Math.abs(xPos);
-			var yDis:Number = Math.abs(yPos);
-			var length:Number = Math.abs(Math.sqrt(Math.pow(xDis, 2) + Math.pow(yDis, 2)));
+			var length:Number = Util.getLength(xPos, yPos);
 			
 			if (length < 5) {
 				FP.world.recycle(this);

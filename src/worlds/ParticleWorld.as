@@ -34,6 +34,8 @@ package worlds
 		
 		private var _sineWave:Sinewave;
 		
+		private var _swarm:Swarm;
+		
 		public function ParticleWorld() 
 		{
 			_voiceArr = new Array(15.2, 15.9, 16.6, 24.25);
@@ -47,13 +49,24 @@ package worlds
 			_activeSource = new Array();
 			
 			_sineWave = new Sinewave();
-			_sineWave.init(this);
-			/*
-			_sineWave = new Array();
-			spawnSine();
-			*/
+			add(_sineWave);
+		}
+		
+		override public function begin():void
+		{	
+			_swarm = new Swarm();
+			add(_swarm);
+			_swarm.init();
 			
-			spawnBlocks();
+			_sineWave.init();
+			
+			timerdisplay = new TimeDisplay(time);
+			add(timerdisplay);
+			
+			currVoice = 0;
+			
+			var music:Sound = new MUSIC();
+			_channel = music.play(0, 1);
 		}
 		
 		override public function update():void 
@@ -85,80 +98,8 @@ package worlds
 				}
 			}
 			
-			//updateSine();
 			super.update();
 		}
-		
-		override public function begin():void
-		{
-			FP.console.enable();
-			
-			timerdisplay = new TimeDisplay(time);
-			add(timerdisplay);
-			
-			currVoice = 0;
-			
-			var music:Sound = new MUSIC();
-			_channel = music.play(0, 1);
-		}
-		
-		private function spawnBlocks():void 
-		{	
-			// top and bottom of screen
-			for (var x:Number = 0; x < FP.screen.width; x+=10)
-			{
-				// top
-				var topBlock:Chaser = new Chaser();
-				topBlock.init(x, -5);
-				
-				// bottom
-				var bottomBlock:Chaser = new Chaser();
-				bottomBlock.init(x, FP.screen.height + 5);
-				
-				add(topBlock);
-				add(bottomBlock);
-			}
-			
-			for (var y:Number = 0; y < FP.screen.height; y += 10)
-			{
-				// left
-				var leftBlock:Chaser = new Chaser();
-				leftBlock.init(-5, y);
-				
-				// right
-				var rightBlock:Chaser = new Chaser();
-				rightBlock.init(FP.screen.width + 5, y);
-				
-				add(leftBlock);
-				add(rightBlock);
-			}
-		}
-		
-		/*
-		private function spawnSine():void
-		{	
-			for (var i:Number = 0; i < 800; i+=1)
-			{
-				var newBlock:Block = new Block();
-				var xPos:Number = 0 + i * 4;
-				newBlock.init(xPos, (Math.sin(time * 5) * 10) + 300);
-				_sineWave.push(newBlock);
-				add(newBlock);
-			}
-		}
-		*/
-		
-		/*
-		private function updateSine():void
-		{
-			//((Block)(_sineWave[0])).y = (Math.sin(time*5) * 10) + 300;
-			
-			for (var i:Number = 0; i < _sineWave.length; i++)
-			{
-				((Block)(_sineWave[i])).y = (12 * Math.sin(time * 20 + (.1 * i)) * 10) + 300;
-			}
-		}
-		*/
 		
 		public function getPlayerX():Number 
 		{

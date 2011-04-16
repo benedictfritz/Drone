@@ -16,7 +16,6 @@
 			FP.screen.color = 0x000000;
 			//FP.console.enable();
 			FP.world = new ParticleWorld();
-			FP.log("Height: " + String(FP.screen.height) + " Width: " + String(FP.screen.width));
 		}
 	}
 	

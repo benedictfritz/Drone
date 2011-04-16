@@ -22,15 +22,13 @@ package entities
 			type = "block";
 		}
 		
-		/*
 		public function init(x:Number, y:Number):void
 		{
 			this.x = x;
 			this.y = y;
 			_speed = 1;
 		}
-		*/
-		
+
 		override public function update():void
 		{	
 			_time += FP.elapsed;
