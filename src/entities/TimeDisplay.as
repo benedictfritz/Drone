@@ -19,7 +19,7 @@ package entities
 		
 		public override function update():void
 		{
-			text.text = String(ParticleWorld.time);
+			text.text = String(ParticleWorld.channel.position);
 		}
 	}
 

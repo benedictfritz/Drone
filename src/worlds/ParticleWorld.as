@@ -17,7 +17,7 @@ package worlds
 	{	
 		[Embed(source = '/../assets/mysounds.swf#drone')]
 		private const MUSIC:Class;
-		private var _channel:SoundChannel;
+		public static var channel:SoundChannel;
 		
 		public static var time:Number = 0;
 		private var currVoice:Number = 0;
@@ -37,10 +37,7 @@ package worlds
 		private var _swarm:Swarm;
 		
 		public function ParticleWorld() 
-		{
-			_voiceArr = new Array(15.2, 15.9, 16.6, 24.25);
-			_silenceArr = new Array(18.2, 26.15);
-			
+		{	
 			_player = new Player();
 			_player.init(400, 300);
 			add(_player);
@@ -66,37 +63,14 @@ package worlds
 			currVoice = 0;
 			
 			var music:Sound = new MUSIC();
-			_channel = music.play(0, 1);
+			channel = music.play(0, 1);
 		}
 		
 		override public function update():void 
 		{	
 			time += FP.elapsed;
 			
-			if (time > _voiceArr[currVoice]) {
-				currVoice++;
-				for ( var i:Number = 0; i < (_waitingSource.length / 3); i++ ) 
-				{
-					var temp:Source = _waitingSource.pop();
-					temp.play();
-					_activeSource.push(temp);
-				}
-			}
-			
-			if (time > _silenceArr[_currSilence]) {
-				_currSilence++;
-				var numActive:Number = _activeSource.length;
-				for (var z:Number = 0; z < numActive; z++)
-				{
-					var stop:Source = _activeSource.pop();
-					stop.stop();
-				}
-				
-				for (var j:Number = 0; j < _waitingSource.length; i++)
-				{
-					_waitingSource.pop();
-				}
-			}
+
 			
 			super.update();
 		}

@@ -11,12 +11,13 @@ package entities
 	public class Chaser extends Entity
 	{	
 		private var _speed:Number;
+		
 		public function Chaser() 
 		{
 			var img:Image = new Image(new BitmapData(4, 4, true, 0xffffffff));
 			graphic = img;
-			setHitbox(img.width, img.height);
-			type = "block";
+			setHitbox(img.width-3, img.height-3);
+			type = "chaser";
 		}
 		
 		public function init(x:Number, y:Number):void
@@ -43,6 +44,17 @@ package entities
 				return;
 			}
 			
+			// If two chasers hit each other, consolidate them into one new
+			// chaser so that shooting into "packs" of chasers doesn't look
+			// bad when they emit
+			/*
+			var c:Chaser = collide("chaser", x, y) as Chaser;
+			if (c)
+			{
+				FP.world.remove(c);
+			}
+			*/
+			
 			// recalculate movement direction every time so the blocks move towards the player
 			var playerX:Number = ((ParticleWorld)(FP.world)).getPlayerX();
 			var playerY:Number = ((ParticleWorld)(FP.world)).getPlayerY();
@@ -62,6 +74,11 @@ package entities
 			
 			x -= (xVec * _speed);
 			y -= (yVec * _speed);
+		}
+		
+		private function checkTime():void
+		{
+			
 		}
 	}
 
