@@ -20,8 +20,6 @@ package worlds
 		public static var channel:SoundChannel;
 		
 		public static var time:Number = 0;
-		private var currVoice:Number = 0;
-		private var _currSilence:Number = 0;
 		
 		private var _voiceArr:Array;
 		private var _silenceArr:Array;
@@ -60,8 +58,6 @@ package worlds
 			timerdisplay = new TimeDisplay(time);
 			add(timerdisplay);
 			
-			currVoice = 0;
-			
 			var music:Sound = new MUSIC();
 			channel = music.play(0, 1);
 		}
@@ -85,9 +81,11 @@ package worlds
 			return _player.getY();
 		}
 		
+		/*
 		public function addSource(src:Source):void
 		{
 			_waitingSource.push(src);
 		}
+		*/
 	}
 }

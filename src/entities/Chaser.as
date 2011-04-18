@@ -40,7 +40,7 @@ package entities
 				FP.world.remove(this);
 				var newSource:Source = FP.world.create(Source, true) as Source;
 				newSource.init(x, y);
-				((ParticleWorld)(FP.world)).addSource(newSource);
+				//((ParticleWorld)(FP.world)).addSource(newSource);
 				return;
 			}
 			
