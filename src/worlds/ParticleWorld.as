@@ -19,11 +19,6 @@ package worlds
 		private const MUSIC:Class;
 		public static var channel:SoundChannel;
 		
-		public static var time:Number = 0;
-		
-		private var _voiceArr:Array;
-		private var _silenceArr:Array;
-		
 		private var timerdisplay:TimeDisplay;
 		private var _player:Player;
 		
@@ -32,12 +27,21 @@ package worlds
 		
 		private var _sineWave:Sinewave;
 		
-		private var _swarm:Swarm;
+		private var _swarmArray:Array;
 		private var _swarmTimings:Array;
 		private var _currSwarm:Number;
 		
+		private var _timing:Timing;
+		
+		public var time:Number;
+		
 		public function ParticleWorld() 
 		{	
+			_swarmArray = new Array();
+			
+			_timing = new Timing();
+			add(_timing);
+			
 			_player = new Player();
 			_player.init(400, 300);
 			add(_player);
@@ -48,8 +52,9 @@ package worlds
 			_sineWave = new Sinewave();
 			add(_sineWave);
 			
-			_swarmTimings = new Array(20000, 40000, 60000, 80000, 100000, 120000, 140000, 160000);
 			_currSwarm = 0;
+			
+			time = 0;
 		}
 		
 		override public function begin():void
@@ -59,9 +64,12 @@ package worlds
 			timerdisplay = new TimeDisplay(time);
 			add(timerdisplay);
 			
-			_swarm = new Swarm();
+			var _swarm:Swarm = new Swarm();
 			add(_swarm);
 			_swarm.init();
+			_swarmArray.push(_swarm);
+			
+			_swarmArray.push(_swarm);
 			
 			var music:Sound = new MUSIC();
 			channel = music.play(0, 1);
@@ -70,13 +78,6 @@ package worlds
 		override public function update():void 
 		{	
 			time += FP.elapsed;
-			if (channel.position > _swarmTimings[_currSwarm]) {
-				_currSwarm++;
-				_swarm = new Swarm();
-				add(_swarm);
-				_swarm.init();
-			}
-			
 			super.update();
 		}
 		
@@ -90,11 +91,17 @@ package worlds
 			return _player.getY();
 		}
 		
-		/*
-		public function addSource(src:Source):void
+		public function addSwarm():void
 		{
-			_waitingSource.push(src);
+			var newSwarm:Swarm = new Swarm();
+			add(newSwarm);
+			newSwarm.init();
+			_swarmArray.push(newSwarm);
 		}
-		*/
+		
+		public function getSwarms():Array
+		{
+			return _swarmArray;
+		}
 	}
 }
