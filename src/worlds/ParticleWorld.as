@@ -33,6 +33,8 @@ package worlds
 		private var _sineWave:Sinewave;
 		
 		private var _swarm:Swarm;
+		private var _swarmTimings:Array;
+		private var _currSwarm:Number;
 		
 		public function ParticleWorld() 
 		{	
@@ -45,18 +47,21 @@ package worlds
 			
 			_sineWave = new Sinewave();
 			add(_sineWave);
+			
+			_swarmTimings = new Array(20000, 40000, 60000, 80000, 100000, 120000, 140000, 160000);
+			_currSwarm = 0;
 		}
 		
 		override public function begin():void
 		{	
-			_swarm = new Swarm();
-			add(_swarm);
-			_swarm.init();
-			
 			_sineWave.init();
 			
 			timerdisplay = new TimeDisplay(time);
 			add(timerdisplay);
+			
+			_swarm = new Swarm();
+			add(_swarm);
+			_swarm.init();
 			
 			var music:Sound = new MUSIC();
 			channel = music.play(0, 1);
@@ -65,8 +70,12 @@ package worlds
 		override public function update():void 
 		{	
 			time += FP.elapsed;
-			
-
+			if (channel.position > _swarmTimings[_currSwarm]) {
+				_currSwarm++;
+				_swarm = new Swarm();
+				add(_swarm);
+				_swarm.init();
+			}
 			
 			super.update();
 		}
