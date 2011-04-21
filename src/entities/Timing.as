@@ -27,22 +27,52 @@ package entities
 		{
 			playAll = new Array();
 			playAll[0] = 16600;
-			playAll[1] = 34650;
+			playAll[1] = 24250;
+			playAll[2] = 34750;
+			playAll[3] = 44300;
+			// bridge here
+			playAll[4] = 74750;
+			playAll[5] = 84250;
+			playAll[6] = 94750;
+			playAll[7] = 104250;
+			//bridge 2 here
+			playAll[8] = 142750;
+			playAll[9] = 152400;
 			currAll = 0;
 			
 			playHalf = new Array();
 			playHalf[0] = 15900;
-			playHalf[1] = 33950;
+			playHalf[1] = 34200;
+			// bridge here
+			playHalf[2] = 74200;
+			playHalf[3] = 94250;
+			//bridge 2 here
+			playHalf[4] = 142100;
 			currHalf = 0;
 			
 			playThird = new Array();
 			playThird[0] = 15200;
 			playThird[1] = 33250;
+			// bridge here
+			playThird[2] = 73350;
+			playThird[3] = 93500;
+			//bridge 2 here
+			playThird[4] = 141200;
 			currThird = 0;
 			
 			stopAll = new Array();
 			stopAll[0] = 18200;
-			stopAll[1] = 37050;
+			stopAll[1] = 26150;
+			stopAll[2] = 38100;
+			stopAll[3] = 46200;
+			// bridge here
+			stopAll[4] = 78250;
+			stopAll[5] = 86300;
+			stopAll[6] = 98250;
+			stopAll[7] = 106200;
+			//bridge 2 here
+			stopAll[8] = 146200;
+			stopAll[9] = 154200;
 			currStop = 0;
 			
 			swarmTimings = new Array(500, 20000, 40000, 60000, 80000, 100000, 120000, 140000, 160000);

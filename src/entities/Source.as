@@ -55,11 +55,12 @@ package entities
 			var s:Source = collide("source", x, y) as Source;
 			if (s)
 			{
+				this.collidable = false;
 				Swarm.removeWaiting(this);
 				world.remove(this);
 				return;
 			}
-
+			
 			if (_playing)
 			{
 				graphic = _emitter;
