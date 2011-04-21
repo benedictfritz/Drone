@@ -64,12 +64,7 @@ package worlds
 			timerdisplay = new TimeDisplay(time);
 			add(timerdisplay);
 			
-			var _swarm:Swarm = new Swarm();
-			add(_swarm);
-			_swarm.init();
-			_swarmArray.push(_swarm);
-			
-			_swarmArray.push(_swarm);
+			//_swarmArray.push(_swarm);
 			
 			var music:Sound = new MUSIC();
 			channel = music.play(0, 1);

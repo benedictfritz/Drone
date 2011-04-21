@@ -1,5 +1,6 @@
 package entities
 {
+	import adobe.utils.ProductManager;
 	import flash.display.BitmapData;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -10,6 +11,11 @@ package entities
 	
 	public class Source extends Entity 
 	{
+		// staticly keep track of the number of sources created
+		// so each can be assigned a unique ID
+		private static var _idCounter:uint = 0;
+		private var _id:uint;
+		
 		private var _bmp:BitmapData;
 		private var _emitter:Emitter;
 		private var _playing:Boolean;
@@ -17,6 +23,9 @@ package entities
 		
 		public function Source()
 		{
+			_id = _idCounter;
+			_idCounter++;
+			
 			_image = new Image(new BitmapData(4, 4, false, 0xFF0000));
 			var color:uint = randColor();
 			type = "source";
@@ -32,7 +41,6 @@ package entities
 			
 			_playing = false;
 
-			// every new source is added to the waiting sources
 			Swarm.pushWaiting(this);
 		}
 		
@@ -47,9 +55,11 @@ package entities
 			var s:Source = collide("source", x, y) as Source;
 			if (s)
 			{
-				FP.world.remove(s);
+				Swarm.removeWaiting(this);
+				world.remove(this);
+				return;
 			}
-			
+
 			if (_playing)
 			{
 				graphic = _emitter;
@@ -57,7 +67,6 @@ package entities
 				{
 					_emitter.emit("1", 0, 0);
 				}
-				//FP.world.recycle(this);
 			}
 			else
 			{
@@ -97,6 +106,11 @@ package entities
 		public function stop():void
 		{
 			_playing = false;
+		}
+		
+		public function getID():uint
+		{
+			return _id;
 		}
 	}
 

@@ -61,6 +61,19 @@ package entities
 			_waitingSource.push(source);
 		}
 		
+		public static function removeWaiting(source:Source):void {
+			var size:uint = _waitingSource.length;
+			for (var i:uint = 0; i < size; i++)
+			{
+				// compare ids and remove the source with the ID of
+				// the source being removed
+				if (Source(_waitingSource[i]).getID == source.getID) {
+					_waitingSource.splice(i, i);
+					break;
+				}
+			}
+		}
+		
 		private function spawnSwarm():void
 		{
 			// top and bottom of screen
@@ -101,6 +114,8 @@ package entities
 			
 			for (var i:Number = 0; i < _max; i++) {
 				var temp:Source = _waitingSource.pop();
+				// some sources have been removed via collision with
+				// other sources but are still in the array
 				if (temp == null)
 					break;
 				Source(temp).play();
@@ -114,7 +129,7 @@ package entities
 			for (var z:Number = 0; z < _numActive; z++) {
 				var temp:Source = _activeSource.pop();
 				temp.stop();
-				world.recycle(temp);
+				world.remove(temp);
 			}
 		}
 		

@@ -35,12 +35,11 @@ package entities
 			// In the case of collision, remove the bullet and replace
 			// the block with a source
 			if (b)
-			{
+			{		
 				b.destroy();
 				FP.world.remove(this);
 				var newSource:Source = FP.world.create(Source, true) as Source;
 				newSource.init(x, y);
-				//((ParticleWorld)(FP.world)).addSource(newSource);
 				return;
 			}
 			
@@ -74,11 +73,6 @@ package entities
 			
 			x -= (xVec * _speed);
 			y -= (yVec * _speed);
-		}
-		
-		private function checkTime():void
-		{
-			
 		}
 	}
 
