@@ -9,33 +9,10 @@ package entities
 
 	public class Swarm extends Entity
 	{
-		private var blocks:Array;
-		// Array and index variable for the voice timings
-		private var _voiceArr:Array;
-		private var _currVoice:Number = 0;
+		protected var blocks:Array;
 		
-		// Array and index variable for the silence timings
-		private var _silenceArr:Array;
-		private var _currSilence:Number = 0;
-		
-		private var _timings:Array;
-		// _currTiming will track the current sequence that the game
-		// will play, advancing each time the sequence begins
-		private var _currTiming:Number;
-		
-		// _active will store whether or not the sequence is in progress
-		// will be static because all should be active or none should be active
-		private static var _active:Boolean = false;
-		
-		// rather than mess around with arrays, just keep a boolean if it's
-		// the "now i see" portion
-		private var _singing:Boolean;
-		private var _voiceOffset:Number;
-		
-		private static var _waitingSource:Array = new  Array;
-		private static var _activeSource:Array = new Array;
-		// need to track the number of sources at the start of NIS (Now I See)
-		// so that we can make all of them active
+		protected static var _waitingSource:Array = new  Array;
+		protected static var _activeSource:Array = new Array;
 		
 		public function Swarm() 
 		{		
@@ -128,11 +105,20 @@ package entities
 			var _numActive:Number = _activeSource.length;
 			for (var z:Number = 0; z < _numActive; z++) {
 				var temp:Source = _activeSource.pop();
-				temp.stop();
-				world.remove(temp);
+				if(temp != null) {
+					temp.stop();
+					temp.destroy();
+					//world.remove(temp);
+				}
 			}
+			//world.remove(this);
+			//destroy();
 		}
 		
+		public function destroy():void
+		{
+			world.remove(this);
+		}
 	}
 
 }

@@ -25,7 +25,8 @@ package worlds
 		private var _waitingSource:Array;
 		private var _activeSource:Array;
 		
-		private var _sineWave:Sinewave;
+		private var _topSineWave:Sinewave;
+		private var _bottomSineWave:Sinewave;
 		
 		private var _swarmArray:Array;
 		private var _swarmTimings:Array;
@@ -49,8 +50,10 @@ package worlds
 			_waitingSource = new Array();
 			_activeSource = new Array();
 			
-			_sineWave = new Sinewave();
-			add(_sineWave);
+			_topSineWave = new Sinewave(50, 15, 15);
+			_bottomSineWave = new Sinewave(550, 15, 15);
+			add(_topSineWave);
+			add(_bottomSineWave);
 			
 			_currSwarm = 0;
 			
@@ -59,7 +62,8 @@ package worlds
 		
 		override public function begin():void
 		{	
-			_sineWave.init();
+			_topSineWave.init();
+			_bottomSineWave.init();
 			
 			timerdisplay = new TimeDisplay(time);
 			add(timerdisplay);
@@ -67,7 +71,7 @@ package worlds
 			//_swarmArray.push(_swarm);
 			
 			var music:Sound = new MUSIC();
-			channel = music.play(0, 1);
+			channel = music.play(110000, 1);
 		}
 		
 		override public function update():void 
@@ -92,6 +96,14 @@ package worlds
 			add(newSwarm);
 			newSwarm.init();
 			_swarmArray.push(newSwarm);
+		}
+		
+		public function addStream():void
+		{
+			var newStream:Stream = new Stream();
+			add(newStream);
+			newStream.init();
+			_swarmArray.push(newStream);
 		}
 		
 		public function getSwarms():Array

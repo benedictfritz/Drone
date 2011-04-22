@@ -14,7 +14,7 @@
 			super(800, 600);
 			FP.screen.scale = 1;
 			FP.screen.color = 0x000000;
-			//FP.console.enable();
+			FP.console.enable();
 			FP.world = new ParticleWorld();
 		}
 	}

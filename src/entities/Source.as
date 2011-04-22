@@ -113,6 +113,11 @@ package entities
 		{
 			return _id;
 		}
+		
+		public function destroy():void
+		{
+			world.remove(this);
+		}
 	}
 
 }

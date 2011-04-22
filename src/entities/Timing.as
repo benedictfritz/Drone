@@ -20,11 +20,14 @@ package entities
 		private var currStop:uint;
 		private var swarmTimings:Array;
 		private var currSwarm:uint;
+		private var streamTimings:Array;
+		private var currStream:uint;
 		
 		private var time:Number;
 		
 		public function Timing() 
 		{
+			/*
 			playAll = new Array();
 			playAll[0] = 16600;
 			playAll[1] = 24250;
@@ -36,7 +39,7 @@ package entities
 			playAll[6] = 94750;
 			playAll[7] = 104250;
 			//bridge 2 here
-			playAll[8] = 142750;
+			playAll[8] = 142280;
 			playAll[9] = 152400;
 			currAll = 0;
 			
@@ -47,7 +50,7 @@ package entities
 			playHalf[2] = 74200;
 			playHalf[3] = 94250;
 			//bridge 2 here
-			playHalf[4] = 142100;
+			playHalf[4] = 142220;
 			currHalf = 0;
 			
 			playThird = new Array();
@@ -57,7 +60,7 @@ package entities
 			playThird[2] = 73350;
 			playThird[3] = 93500;
 			//bridge 2 here
-			playThird[4] = 141200;
+			playThird[4] = 142130;
 			currThird = 0;
 			
 			stopAll = new Array();
@@ -75,8 +78,56 @@ package entities
 			stopAll[9] = 154200;
 			currStop = 0;
 			
-			swarmTimings = new Array(500, 20000, 40000, 60000, 80000, 100000, 120000, 140000, 160000);
+			swarmTimings = new Array(500, 16600, 24250, 34750, 44300, 74750, 84250, 94750, 104250, 142280, 152400);
 			currSwarm = 0;
+			
+			streamTimings = new Array(112000);
+			currStream = 0;
+			*/
+			
+			playAll = new Array();
+			// bridge here
+			playAll[0] = 74800;
+			playAll[1] = 84250;
+			playAll[2] = 94750;
+			playAll[3] = 104250;
+			//bridge 2 here
+			playAll[4] = 142280;
+			playAll[5] = 152400;
+			currAll = 0;
+			
+			playHalf = new Array();
+			// bridge here
+			playHalf[0] = 74200;
+			playHalf[1] = 94250;
+			// bridge 2 here
+			playHalf[2] = 142220;
+			currHalf = 0;
+			
+			playThird = new Array();
+			// bridge here
+			playThird[0] = 73500;
+			playThird[1] = 93500;
+			//bridge 2 here
+			playThird[2] = 142130;
+			currThird = 0;
+			
+			stopAll = new Array();
+			// bridge here
+			stopAll[0] = 78250;
+			stopAll[1] = 86300;
+			stopAll[2] = 98250;
+			stopAll[3] = 106200;
+			//bridge 2 here
+			stopAll[4] = 146200;
+			stopAll[5] = 154200;
+			currStop = 0;
+			
+			swarmTimings = new Array(7000, 74750, 84250, 94750, 104250, 142280, 152400);
+			currSwarm = 0;
+			streamTimings = new Array();
+			streamTimings[0] = 112000;
+			currStream = 0;
 		}
 		
 		override public function update():void
@@ -87,6 +138,10 @@ package entities
 			if ( time > swarmTimings[currSwarm]) {
 				ParticleWorld(world).addSwarm();
 				currSwarm++;
+			}
+			if (time > streamTimings[currStream]) {
+				ParticleWorld(world).addStream();
+				currStream++;
 			}
 			
 			/*

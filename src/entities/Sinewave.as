@@ -12,16 +12,23 @@ package entities
 		private var _time:Number;
 		private var _blocks:Array;
 		
-		public function Sinewave() 
+		private var amplitude:Number;
+		private var angularFreq:Number;
+		private var yOffset:Number
+		
+		public function Sinewave(y:Number, amp:Number, freq:Number) 
 		{
 			_blocks = new Array();
 			_time = 0;
 			
-			for (var i:Number = 0; i < 800; i+=1)
+			amplitude = amp;
+			angularFreq = freq;
+			yOffset = y;
+			
+			for (var i:Number = 0; i < FP.width; i+=8)
 			{
 				var newBlock:Block = new Block();
-				var xPos:Number = 0 + i * 4;
-				newBlock.init(xPos, (Math.sin(_time * 5) * 10) + 300);
+				newBlock.init(i, (Math.sin(_time * angularFreq) * amplitude) + yOffset);
 				_blocks.push(newBlock);
 			}
 		}
@@ -39,7 +46,7 @@ package entities
 			
 			for (var i:Number = 0; i < _blocks.length; i++)
 			{
-				((Block)(_blocks[i])).y = (12 * Math.sin(_time * 20 + (.1 * i)) * 10) + 300;
+				((Block)(_blocks[i])).y = (amplitude * Math.sin(_time * angularFreq + (.1 * i))) + yOffset;
 			}
 		}
 	}

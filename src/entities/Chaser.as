@@ -24,7 +24,7 @@ package entities
 		{
 			this.x = x;
 			this.y = y;
-			_speed = 2;
+			_speed = 200;
 		}
 		
 		override public function update():void
@@ -71,8 +71,8 @@ package entities
 			var xVec:Number = xPos / length;
 			var yVec:Number = yPos / length;
 			
-			x -= (xVec * _speed);
-			y -= (yVec * _speed);
+			x -= (xVec * _speed * FP.elapsed);
+			y -= (yVec * _speed * FP.elapsed);
 		}
 	}
 

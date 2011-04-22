@@ -10,6 +10,8 @@ package entities
 	
 	public class Player extends Entity 
 	{	
+		private var speed:Number = 150;
+		
 		public function Player() 
 		{
 			var _circle:Image = Image.createCircle(5, 0xFFFFFF);
@@ -26,19 +28,19 @@ package entities
 		{
 			if (Input.check(Key.D))
 			{
-				x += 100 * FP.elapsed;
+				x += speed * FP.elapsed;
 			}
 			if (Input.check(Key.A))
 			{
-				x -= 100 * FP.elapsed;
+				x -= speed * FP.elapsed;
 			}
 			if (Input.check(Key.W))
 			{
-				y -= 100 * FP.elapsed;
+				y -= speed * FP.elapsed;
 			}
 			if (Input.check(Key.S))
 			{
-				y += 100 * FP.elapsed;
+				y += speed * FP.elapsed;
 			}
 			
 			if (Input.mousePressed)
