@@ -54,19 +54,19 @@ package entities
 			currStream = 0;
 			
 			sineTimings = new Array();
-			sineTimings[0] = [58500];
-			sineTimings[1] = [26.5, 46.5, 86.5, 106500, 141500];
-			sineTimings[2] = [18200, 39000, 78250, 98500, 135000, 146500];
-			sineTimings[3] = [66500];
-			sineTimings[4] = [54000, 64500, 129000, ];
-			sineTimings[5] = [0, 34000, 44500, 75000, 84500, 105000, 129000, 146500, 155400];
+			sineTimings[0] = [58500, 999999999];
+			sineTimings[1] = [26500, 46500, 86500, 106500, 141500, 999999999];
+			sineTimings[2] = [18200, 39000, 78250, 98500, 135000, 146500, 999999999];
+			sineTimings[3] = [66500, 999999999];
+			sineTimings[4] = [54000, 64500, 129000, 999999999];
+			sineTimings[5] = [0, 34000, 44500, 75000, 84500, 105000, 129000, 146500, 155400, 999999999];
 		}
 		
 		override public function update():void
 		{
 			time = ParticleWorld.channel.position;
 			
-			//checkSines();
+			checkSines();
 
 			//first, spawn new swarms if it's time
 			if ( time > swarmTimings[currSwarm]) {
@@ -118,31 +118,39 @@ package entities
 			var numTimings:Number = sineTimings.length;
 			for (var i:Number = 0; i < numTimings; i++) {
 				if (sineTimings[i][0] < time) {
+					trace(String(sineTimings[i][0]));
 					switch (i) {
 						case 0:
 							ParticleWorld(world).setSineAmp(15);
+							ParticleWorld(world).setSineFreq(2);
+							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 1:
 							ParticleWorld(world).setSineAmp(20);
+							ParticleWorld(world).setSineFreq(5);
+							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 2:
 							ParticleWorld(world).setSineAmp(25);
+							ParticleWorld(world).setSineFreq(15);
+							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 3:
 							ParticleWorld(world).setSineAmp(30);
+							ParticleWorld(world).setSineFreq(20);
+							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 4:
 							ParticleWorld(world).setSineAmp(35);
+							ParticleWorld(world).setSineFreq(50);
+							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 5:
 							ParticleWorld(world).setSineAmp(40);
-							break;
-						case 6:
-							ParticleWorld(world).setSineAmp(45);
+							ParticleWorld(world).setSineFreq(60);
+							(sineTimings[i] as Array).splice(0, 1);
 							break;
 					}
-					// remove the timing entry that was just played
-					sineTimings[i].splice(0,0);
 				}
 				
 			}
