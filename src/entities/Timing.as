@@ -23,116 +23,50 @@ package entities
 		private var streamTimings:Array;
 		private var currStream:uint;
 		
+		// This is probably how I should have done all the other timing arrays
+		// Oh well.
+		private var sineTimings:Array;
+		
 		private var time:Number;
 		
 		public function Timing() 
 		{
-			/*
-			playAll = new Array();
-			playAll[0] = 16600;
-			playAll[1] = 24250;
-			playAll[2] = 34750;
-			playAll[3] = 44300;
-			// bridge here
-			playAll[4] = 74750;
-			playAll[5] = 84250;
-			playAll[6] = 94750;
-			playAll[7] = 104250;
-			//bridge 2 here
-			playAll[8] = 142280;
-			playAll[9] = 152400;
+			// bridge 1 after 44300
+			// bridge 2 after 104250
+			playAll = new Array(16600, 24250, 34750, 44300, 74750, 84250, 94750, 104250, 142280, 152400);
 			currAll = 0;
 			
-			playHalf = new Array();
-			playHalf[0] = 15900;
-			playHalf[1] = 34200;
-			// bridge here
-			playHalf[2] = 74200;
-			playHalf[3] = 94250;
-			//bridge 2 here
-			playHalf[4] = 142220;
+			playHalf = new Array(15900, 34200, 74200, 94250);
 			currHalf = 0;
 			
-			playThird = new Array();
-			playThird[0] = 15200;
-			playThird[1] = 33250;
-			// bridge here
-			playThird[2] = 73350;
-			playThird[3] = 93500;
-			//bridge 2 here
-			playThird[4] = 142130;
+			playThird = new Array(15200, 33250, 73350, 93500, 142130);
 			currThird = 0;
 			
-			stopAll = new Array();
-			stopAll[0] = 18200;
-			stopAll[1] = 26150;
-			stopAll[2] = 38100;
-			stopAll[3] = 46200;
-			// bridge here
-			stopAll[4] = 78250;
-			stopAll[5] = 86300;
-			stopAll[6] = 98250;
-			stopAll[7] = 106200;
-			//bridge 2 here
-			stopAll[8] = 146200;
-			stopAll[9] = 154200;
+			// bridge 1 after 46200
+			// bridge 2 after 106200
+			stopAll = new Array(18200, 26150, 38100, 46200, 78250, 86300, 98250, 106200, 146200, 154200);
 			currStop = 0;
 			
-			swarmTimings = new Array(500, 16600, 24250, 34750, 44300, 74750, 84250, 94750, 104250, 142280, 152400);
+			swarmTimings = new Array(500, 8000, 18200, 26150, 38100, 46200, 78250, 86300, 98250, 106200, 146200, 154200);
 			currSwarm = 0;
 			
 			streamTimings = new Array(112000);
 			currStream = 0;
-			*/
 			
-			playAll = new Array();
-			// bridge here
-			playAll[0] = 74800;
-			playAll[1] = 84250;
-			playAll[2] = 94750;
-			playAll[3] = 104250;
-			//bridge 2 here
-			playAll[4] = 142280;
-			playAll[5] = 152400;
-			currAll = 0;
-			
-			playHalf = new Array();
-			// bridge here
-			playHalf[0] = 74200;
-			playHalf[1] = 94250;
-			// bridge 2 here
-			playHalf[2] = 142220;
-			currHalf = 0;
-			
-			playThird = new Array();
-			// bridge here
-			playThird[0] = 73500;
-			playThird[1] = 93500;
-			//bridge 2 here
-			playThird[2] = 142130;
-			currThird = 0;
-			
-			stopAll = new Array();
-			// bridge here
-			stopAll[0] = 78250;
-			stopAll[1] = 86300;
-			stopAll[2] = 98250;
-			stopAll[3] = 106200;
-			//bridge 2 here
-			stopAll[4] = 146200;
-			stopAll[5] = 154200;
-			currStop = 0;
-			
-			swarmTimings = new Array(7000, 74750, 84250, 94750, 104250, 142280, 152400);
-			currSwarm = 0;
-			streamTimings = new Array();
-			streamTimings[0] = 112000;
-			currStream = 0;
+			sineTimings = new Array();
+			sineTimings[0] = [58500];
+			sineTimings[1] = [26.5, 46.5, 86.5, 106500, 141500];
+			sineTimings[2] = [18200, 39000, 78250, 98500, 135000, 146500];
+			sineTimings[3] = [66500];
+			sineTimings[4] = [54000, 64500, 129000, ];
+			sineTimings[5] = [0, 34000, 44500, 75000, 84500, 105000, 129000, 146500, 155400];
 		}
 		
 		override public function update():void
 		{
 			time = ParticleWorld.channel.position;
+			
+			//checkSines();
 
 			//first, spawn new swarms if it's time
 			if ( time > swarmTimings[currSwarm]) {
@@ -176,6 +110,41 @@ package entities
 					Swarm(swarms[i]).stop();
 				}
 				currStop++;
+			}
+		}
+		
+		private function checkSines():void
+		{
+			var numTimings:Number = sineTimings.length;
+			for (var i:Number = 0; i < numTimings; i++) {
+				if (sineTimings[i][0] < time) {
+					switch (i) {
+						case 0:
+							ParticleWorld(world).setSineAmp(15);
+							break;
+						case 1:
+							ParticleWorld(world).setSineAmp(20);
+							break;
+						case 2:
+							ParticleWorld(world).setSineAmp(25);
+							break;
+						case 3:
+							ParticleWorld(world).setSineAmp(30);
+							break;
+						case 4:
+							ParticleWorld(world).setSineAmp(35);
+							break;
+						case 5:
+							ParticleWorld(world).setSineAmp(40);
+							break;
+						case 6:
+							ParticleWorld(world).setSineAmp(45);
+							break;
+					}
+					// remove the timing entry that was just played
+					sineTimings[i].splice(0,0);
+				}
+				
 			}
 		}
 	}

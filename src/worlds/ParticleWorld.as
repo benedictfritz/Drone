@@ -50,8 +50,8 @@ package worlds
 			_waitingSource = new Array();
 			_activeSource = new Array();
 			
-			_topSineWave = new Sinewave(50, 15, 15);
-			_bottomSineWave = new Sinewave(550, 15, 15);
+			_topSineWave = new Sinewave(50, 50, 20);
+			_bottomSineWave = new Sinewave(550, 5, 20);
 			add(_topSineWave);
 			add(_bottomSineWave);
 			
@@ -71,7 +71,7 @@ package worlds
 			//_swarmArray.push(_swarm);
 			
 			var music:Sound = new MUSIC();
-			channel = music.play(110000, 1);
+			channel = music.play(0, 1);
 		}
 		
 		override public function update():void 
@@ -109,6 +109,12 @@ package worlds
 		public function getSwarms():Array
 		{
 			return _swarmArray;
+		}
+		
+		public function setSineAmp(amp:Number):void
+		{
+			_topSineWave.setAmp(amp);
+			_bottomSineWave.setAmp(amp);
 		}
 	}
 }

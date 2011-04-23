@@ -46,8 +46,14 @@ package entities
 			
 			for (var i:Number = 0; i < _blocks.length; i++)
 			{
-				((Block)(_blocks[i])).y = (amplitude * Math.sin(_time * angularFreq + (.1 * i))) + yOffset;
+				((Block)(_blocks[i])).y = (amplitude * Math.sin(_time * angularFreq + i*.5)) + yOffset;
+				//((Block)(_blocks[i])).y = (amplitude * Math.sin(_time * angularFreq)) + yOffset;
 			}
+		}
+		
+		public function setAmp(amp:Number):void
+		{
+			amplitude = amp;
 		}
 	}
 

@@ -24,7 +24,7 @@ package entities
 		{
 			this.x = x;
 			this.y = y;
-			_speed = 200;
+			_speed = 150;
 		}
 		
 		override public function update():void
