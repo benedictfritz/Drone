@@ -79,6 +79,7 @@ package entities
 		{
 			var color:uint;
 			
+			/*
 			switch(FP.rand(5)) {
 				case 0:
 					color = 0xEFD279;
@@ -94,6 +95,25 @@ package entities
 					break;
 				case 4:
 					color = 0x2C5700;
+					break;
+			}
+			*/
+			
+			switch(FP.rand(5)) {
+				case 0:
+					color = 0xff0000;
+					break;
+				case 1:
+					color = 0xFF7300;
+					break;
+				case 2:
+					color = 0x0051FF;
+					break;
+				case 3:
+					color = 0x00FF00;
+					break;
+				case 4:
+					color = 0xB700FF;
 					break;
 			}
 			return color;
@@ -116,7 +136,8 @@ package entities
 		
 		public function destroy():void
 		{
-			world.remove(this);
+			if(world)
+				world.remove(this);
 		}
 	}
 

@@ -33,13 +33,13 @@ package entities
 		{
 			// bridge 1 after 44300
 			// bridge 2 after 104250
-			playAll = new Array(16600, 24250, 34750, 44300, 74750, 84250, 94750, 104250, 142280, 152400);
+			playAll = new Array(16600, 24250, 34750, 44300, 74750, 84250, 94750, 104250, 142280, 152400, 99999999);
 			currAll = 0;
 			
-			playHalf = new Array(15900, 34200, 74200, 94250);
+			playHalf = new Array(15900, 34200, 739000, 94000, 99999999);
 			currHalf = 0;
 			
-			playThird = new Array(15200, 33250, 73350, 93500, 142130);
+			playThird = new Array(15200, 33250, 73000, 93200, 142130, 99999999);
 			currThird = 0;
 			
 			// bridge 1 after 46200
@@ -77,11 +77,6 @@ package entities
 				ParticleWorld(world).addStream();
 				currStream++;
 			}
-			
-			/*
-			if (time > 21000)
-				trace("Break here");
-				*/
 				
 			var swarms:Array = ParticleWorld(world).getSwarms();
 			var numSwarms:Number = swarms.length;
@@ -110,6 +105,14 @@ package entities
 					Swarm(swarms[i]).stop();
 				}
 				currStop++;
+				
+				// getting a bug where not all of the sources are being cleared
+				// clear them this way to make sure
+				var remainingSources:Vector.<Source> = new Vector.<Source>();
+				world.getClass(Source, remainingSources);
+				for each (var source:Source in remainingSources) {
+					world.remove(source);
+				}
 			}
 		}
 		
@@ -118,26 +121,27 @@ package entities
 			var numTimings:Number = sineTimings.length;
 			for (var i:Number = 0; i < numTimings; i++) {
 				if (sineTimings[i][0] < time) {
-					trace(String(sineTimings[i][0]));
 					switch (i) {
 						case 0:
-							ParticleWorld(world).setSineAmp(15);
-							ParticleWorld(world).setSineFreq(2);
+							ParticleWorld(world).setSineAmp(5);
+							ParticleWorld(world).setSineFreq(50);
 							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 1:
 							ParticleWorld(world).setSineAmp(20);
-							ParticleWorld(world).setSineFreq(5);
+							ParticleWorld(world).setSineFreq(50);
+							ParticleWorld(world).setSineSpeed(10);
 							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 2:
 							ParticleWorld(world).setSineAmp(25);
-							ParticleWorld(world).setSineFreq(15);
+							ParticleWorld(world).setSineFreq(50);
 							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 3:
 							ParticleWorld(world).setSineAmp(30);
-							ParticleWorld(world).setSineFreq(20);
+							ParticleWorld(world).setSineFreq(50);
+							ParticleWorld(world).setSineSpeed(30);
 							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 4:
@@ -146,8 +150,9 @@ package entities
 							(sineTimings[i] as Array).splice(0, 1);
 							break;
 						case 5:
-							ParticleWorld(world).setSineAmp(40);
+							ParticleWorld(world).setSineAmp(50);
 							ParticleWorld(world).setSineFreq(60);
+							ParticleWorld(world).setSineSpeed(5);
 							(sineTimings[i] as Array).splice(0, 1);
 							break;
 					}

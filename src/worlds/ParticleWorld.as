@@ -50,8 +50,8 @@ package worlds
 			_waitingSource = new Array();
 			_activeSource = new Array();
 			
-			_topSineWave = new Sinewave(50, 50, 40);
-			_bottomSineWave = new Sinewave(550, 5, 30);
+			_topSineWave = new Sinewave(50, 50, 40, 20);
+			_bottomSineWave = new Sinewave(550, 5, 30, 20);
 			add(_topSineWave);
 			add(_bottomSineWave);
 			
@@ -121,6 +121,12 @@ package worlds
 		{
 			_topSineWave.setFreq(freq);
 			_bottomSineWave.setFreq(freq);
+		}
+		
+		public function setSineSpeed(speed:Number):void
+		{
+			_topSineWave.setSpeed(speed);
+			_bottomSineWave.setSpeed(speed);
 		}
 	}
 }

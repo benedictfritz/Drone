@@ -17,13 +17,14 @@ package entities
 		private var speed:Number;
 		private var yOffset:Number
 		
-		public function Sinewave(y:Number, amp:Number, freq:Number) 
+		public function Sinewave(y:Number, amp:Number, freq:Number, speed:Number) 
 		{
 			_blocks = new Array();
 			_time = 0;
 			
 			amplitude = amp;
 			angularFreq = freq;
+			this.speed = speed;
 			yOffset = y;
 			
 			for (var i:Number = 0; i < FP.width; i+=8)
@@ -47,7 +48,7 @@ package entities
 			
 			for (var i:Number = 0; i < _blocks.length; i++)
 			{
-				((Block)(_blocks[i])).y = (amplitude * Math.sin(_time * angularFreq + i * .05 * angularFreq)) + yOffset;
+				((Block)(_blocks[i])).y = (-amplitude * Math.sin(_time * angularFreq + i * .05 * speed)) + yOffset;
 				//((Block)(_blocks[i])).y = (amplitude * Math.sin(_time * angularFreq)) + yOffset;
 			}
 		}
@@ -60,6 +61,11 @@ package entities
 		public function setFreq(freq:Number):void
 		{
 			angularFreq = freq;
+		}
+		
+		public function setSpeed(speed:Number):void
+		{
+			this.speed = speed;
 		}
 	}
 

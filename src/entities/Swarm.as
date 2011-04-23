@@ -27,13 +27,6 @@ package entities
 			}
 		}
 		
-		// Do I even need an update function?
-		/*
-		override public function update():void
-		{
-		}
-		*/
-		
 		public static function pushWaiting(source:Entity):void {
 			_waitingSource.push(source);
 		}
@@ -111,7 +104,8 @@ package entities
 					//world.remove(temp);
 				}
 			}
-			//world.remove(this);
+			if(world)
+				world.remove(this);
 			//destroy();
 		}
 		
