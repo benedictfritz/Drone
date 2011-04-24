@@ -79,26 +79,6 @@ package entities
 		{
 			var color:uint;
 			
-			/*
-			switch(FP.rand(5)) {
-				case 0:
-					color = 0xEFD279;
-					break;
-				case 1:
-					color = 0x95CBE9;
-					break;
-				case 2:
-					color = 0x024769;
-					break;
-				case 3:
-					color = 0xAFD775;
-					break;
-				case 4:
-					color = 0x2C5700;
-					break;
-			}
-			*/
-			
 			switch(FP.rand(5)) {
 				case 0:
 					color = 0xff0000;

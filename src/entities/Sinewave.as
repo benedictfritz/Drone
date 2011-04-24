@@ -49,7 +49,6 @@ package entities
 			for (var i:Number = 0; i < _blocks.length; i++)
 			{
 				((Block)(_blocks[i])).y = (-amplitude * Math.sin(_time * angularFreq + i * .05 * speed)) + yOffset;
-				//((Block)(_blocks[i])).y = (amplitude * Math.sin(_time * angularFreq)) + yOffset;
 			}
 		}
 		
