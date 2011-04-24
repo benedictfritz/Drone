@@ -66,6 +66,16 @@ package entities
 		{
 			this.speed = speed;
 		}
+		
+		public function increaseAmp():void
+		{
+			amplitude += .01;
+		}
+		
+		public function changeYoffset(change:Number):void
+		{
+			yOffset += change;
+		}
 	}
 
 }

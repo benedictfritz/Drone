@@ -34,10 +34,15 @@ package worlds
 		
 		private var _timing:Timing;
 		
+		private var _eye:Eye;
+		
 		public var time:Number;
 		
 		public function ParticleWorld() 
 		{	
+			_eye = new Eye();
+			add(_eye);
+			
 			_swarmArray = new Array();
 			
 			_timing = new Timing();
@@ -76,7 +81,17 @@ package worlds
 		
 		override public function update():void 
 		{	
-			time += FP.elapsed;
+			time = channel.position;
+			// Grand finale code
+			if (time > 154200)
+			{
+				_eye.startOpening();
+				_topSineWave.increaseAmp();
+				_bottomSineWave.increaseAmp();
+				_topSineWave.changeYoffset(.1);
+				_bottomSineWave.changeYoffset(-.1);
+			}
+			
 			super.update();
 		}
 		
