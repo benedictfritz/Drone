@@ -52,7 +52,7 @@ package entities
 			swarmTimings = new Array(500, 8000, 18200, 26150, 38100, 46200, 58400, 66200, 78250, 86300, 98250, 106200, 117500, 146200, 99999999);
 			currSwarm = 0;
 			
-			streamTimings = new Array(99999999, 99999999);//112000, 128400, 99999999);
+			streamTimings = new Array(112000, 128400, 99999999);//112000, 128400, 99999999);
 			currStream = 0;
 			
 			sineTimings = new Array();
@@ -85,27 +85,19 @@ package entities
 			var i:Number = 0;
 			
 			if (time > playAll[currAll]) {
-				for (i = 0; i < numSwarms; i++) {
-					Swarm(swarms[i]).play(1);
-				}
+				Swarm.play(1);
 				currAll++;
 			}
 			if (time > playHalf[currHalf]) {
-				for (i = 0; i < numSwarms; i++) {
-					Swarm(swarms[i]).play(2);
-				}
+				Swarm.play(2);
 				currHalf++;
 			}
 			if (time > playThird[currThird]) {
-				for (i = 0; i < numSwarms; i++) {
-					Swarm(swarms[i]).play(3);
-				}
+				Swarm.play(3);
 				currThird++;
 			}
 			if (time > stopAll[currStop]) {
-				for (i = 0; i < numSwarms; i++) {
-					Swarm(swarms[i]).stop();
-				}
+				Swarm.stop();
 				currStop++;
 				
 				// getting a bug where not all of the sources are being cleared

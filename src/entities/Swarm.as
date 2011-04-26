@@ -76,8 +76,13 @@ package entities
 			}
 		}
 		
-		public function play(denominator:Number):void
+		public static function play(denominator:Number):void
 		{
+			/*
+			if (ParticleWorld(world).channel.position > 60000)
+				trace("break here");
+				*/
+			
 			// The fraction parameter is the denominator in the fraction
 			// of total sources to play. Does that make sense?
 			var _max:Number = _waitingSource.length / denominator;
@@ -93,7 +98,7 @@ package entities
 			}
 		}
 		
-		public function stop():void
+		public static function stop():void
 		{
 			var _numActive:Number = _activeSource.length;
 			for (var z:Number = 0; z < _numActive; z++) {
@@ -104,8 +109,10 @@ package entities
 					//world.remove(temp);
 				}
 			}
+			/*
 			if(world)
 				world.remove(this);
+				*/
 			//destroy();
 		}
 		
