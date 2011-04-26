@@ -15,7 +15,7 @@ package entities
 		{
 			opening = false;
 			sprEye.add("rest", [0]);
-			sprEye.add("openclose", [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1], 120, true);
+			sprEye.add("openclose", [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1], 140, true);
 			
 			graphic = sprEye;
 			layer = 0;

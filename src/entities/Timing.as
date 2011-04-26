@@ -22,6 +22,8 @@ package entities
 		private var currSwarm:uint;
 		private var streamTimings:Array;
 		private var currStream:uint;
+		private var cloudTimings:Array;
+		private var currCloud:uint;
 		
 		// This is probably how I should have done all the other timing arrays
 		// Oh well.
@@ -49,11 +51,18 @@ package entities
 			stopAll = new Array(18200, 26150, 38100, 46200, 58400, 66200, 78250, 86300, 98250, 106200, 117000, 128400, 146200, 154200, 99999999);
 			currStop = 0;
 			
-			swarmTimings = new Array(500, 8000, 18200, 26150, 38100, 46200, 58400, 66200, 78250, 86300, 98250, 106200, 117500, 146200, 99999999);
+			//swarmTimings = new Array(500, 8000, 18200, 26150, 38100, 46200, 58400, 66200, 78250, 86300, 98250, 106200, 117500, 146200, 99999999);
+			swarmTimings = new Array(18200, 26150, 38100, 46200, 66200, 78250, 86300, 98250, 106200, 117500, 146200, 99999999);
 			currSwarm = 0;
 			
 			streamTimings = new Array(112000, 128400, 99999999);//112000, 128400, 99999999);
 			currStream = 0;
+			
+			cloudTimings = new Array();
+			cloudTimings[0] = 500;
+			cloudTimings[1] = 8000;
+			cloudTimings[2] = 58400;
+			currCloud = 0;
 			
 			sineTimings = new Array();
 			sineTimings[0] = [58500, 999999999];
@@ -78,6 +87,10 @@ package entities
 			if (time > streamTimings[currStream]) {
 				ParticleWorld(world).addStream();
 				currStream++;
+			}
+			if (time > cloudTimings[currCloud]) {
+				ParticleWorld(world).addCloud();
+				currCloud++;
 			}
 				
 			var swarms:Array = ParticleWorld(world).getSwarms();

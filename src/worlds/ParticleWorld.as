@@ -85,12 +85,16 @@ package worlds
 			// Grand finale code
 			if (time > 154200)
 			{
+				this.remove(_player);
 				_eye.startOpening();
 				_topSineWave.increaseAmp();
 				_bottomSineWave.increaseAmp();
 				_topSineWave.changeYoffset(.1);
 				_bottomSineWave.changeYoffset(-.1);
 			}
+			
+			if (time > 233900)
+				FP.world = new End();
 			
 			super.update();
 		}
@@ -119,6 +123,14 @@ package worlds
 			add(newStream);
 			newStream.init();
 			_swarmArray.push(newStream);
+		}
+		
+		public function addCloud():void
+		{
+			var newCloud:Cloud = new Cloud();
+			add(newCloud);
+			newCloud.init();
+			_swarmArray.push(newCloud);
 		}
 		
 		public function getSwarms():Array
