@@ -29,30 +29,10 @@ package entities
 		
 		override public function update():void
 		{
-			// Assign the collided Bullet Entity to a temporary var.
-			var b:Bullet = collide("bullet", x, y) as Bullet;
-			
-			// In the case of collision, remove the bullet and replace
-			// the block with a source
-			if (b)
-			{		
-				b.destroy();
+			if (checkBulletCollision()) {
 				FP.world.remove(this);
-				var newSource:Source = FP.world.create(Source, true) as Source;
-				newSource.init(x, y);
 				return;
 			}
-			
-			// If two chasers hit each other, consolidate them into one new
-			// chaser so that shooting into "packs" of chasers doesn't look
-			// bad when they emit
-			/*
-			var c:Chaser = collide("chaser", x, y) as Chaser;
-			if (c)
-			{
-				FP.world.remove(c);
-			}
-			*/
 			
 			// recalculate movement direction every time so the blocks move towards the player
 			var playerX:Number = ((ParticleWorld)(FP.world)).getPlayerX();
@@ -73,6 +53,24 @@ package entities
 			
 			x -= (xVec * _speed * FP.elapsed);
 			y -= (yVec * _speed * FP.elapsed);
+		}
+		
+		protected function checkBulletCollision():Source
+		{
+			// Assign the collided Bullet Entity to a temporary var.
+			var b:Bullet = collide("bullet", x, y) as Bullet;
+			
+			// In the case of collision, remove the bullet and replace
+			// the block with a source
+			if (b)
+			{		
+				b.destroy();
+				var newSource:Source = FP.world.create(Source, true) as Source;
+				newSource.init(x, y);
+				return newSource;
+			}
+			else
+				return null;
 		}
 	}
 

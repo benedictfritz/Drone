@@ -7,31 +7,40 @@ package entities
 	import flash.display.BitmapData;
 	import net.flashpunk.graphics.Image;
 	
-	import worlds.ParticleWorld
+	import worlds.*;
 	
-	public class Block extends Entity
+	public class Block extends Chaser
 	{
 		private var _speed:Number;
-		protected var _time:Number;
+		private var countdown:Number;
 		
 		public function Block() 
 		{
-			var img:Image = new Image(new BitmapData(4, 4, false, 0x55FF00));
+			var img:Image = new Image(new BitmapData(4, 4, false, 0xFFFFFF));
 			graphic = img;
 			setHitbox(img.width, img.height);
 			type = "block";
-		}
-		
-		public function init(x:Number, y:Number):void
-		{
-			this.x = x;
-			this.y = y;
-			_speed = 1;
+			
+			countdown = 0;
 		}
 
 		override public function update():void
 		{	
-			_time += FP.elapsed;
+			var newSource:Source = checkBulletCollision();
+			
+			if (newSource) {
+				graphic.visible = false;
+				newSource.play();
+				Menu(world).add(new TransitionOut());
+				//countdown = 0.5;
+			}
+			/*
+			if (countdown != 0) {
+				countdown -= FP.elapsed;
+				if (countdown < 0.1)
+					FP.world = new ParticleWorld();
+			}
+			*/
 		}
 	}
 }

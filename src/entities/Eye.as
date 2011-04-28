@@ -5,7 +5,7 @@ package entities
 
 	public class Eye extends Entity
 	{
-		[Embed(source = '../../assets/eyesheet.png')]
+		[Embed(source = '../../assets/longeyesheet.png')]
 		private const EYE:Class;
 		
 		public var sprEye:Spritemap = new Spritemap(EYE, 800, 600);
@@ -15,7 +15,8 @@ package entities
 		{
 			opening = false;
 			sprEye.add("rest", [0]);
-			sprEye.add("openclose", [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2, 1], 140, true);
+			sprEye.add("add", [0, 1, 2, 3, 4, 5, 6, 7], 10);
+			sprEye.add("openclose", [7, 8, 9, 10, 11, 12, 13, 14, 13, 12, 11, 10, 9, 8, 7], 140);
 			
 			graphic = sprEye;
 			layer = 0;

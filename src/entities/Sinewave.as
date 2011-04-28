@@ -29,7 +29,7 @@ package entities
 			
 			for (var i:Number = 0; i < FP.width; i+=8)
 			{
-				var newBlock:Block = new Block();
+				var newBlock:Sineblock = new Sineblock();
 				newBlock.init(i, (Math.sin(_time * angularFreq) * amplitude) + yOffset);
 				_blocks.push(newBlock);
 			}
@@ -37,7 +37,7 @@ package entities
 		
 		public function init():void
 		{
-			for each(var block:Block in _blocks) {
+			for each(var block:Sineblock in _blocks) {
 				world.add(block);
 			}
 		}
@@ -48,7 +48,7 @@ package entities
 			
 			for (var i:Number = 0; i < _blocks.length; i++)
 			{
-				((Block)(_blocks[i])).y = (-amplitude * Math.sin(_time * angularFreq + i * .05 * speed)) + yOffset;
+				((Sineblock)(_blocks[i])).y = (-amplitude * Math.sin(_time * angularFreq + i * .05 * speed)) + yOffset;
 			}
 		}
 		

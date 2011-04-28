@@ -38,10 +38,15 @@ package worlds
 		
 		public var time:Number;
 		
+		private var reticle:Reticle;
+		
 		public function ParticleWorld() 
 		{	
 			_eye = new Eye();
 			add(_eye);
+			
+			reticle = new Reticle();
+			add(reticle);
 			
 			_swarmArray = new Array();
 			
@@ -79,7 +84,7 @@ package worlds
 			channel = music.play(0, 1);
 		}
 		
-		override public function update():void 
+		override public function update():void
 		{	
 			time = channel.position;
 			// Grand finale code
@@ -95,6 +100,9 @@ package worlds
 			
 			if (time > 233900)
 				FP.world = new End();
+				
+			if (Input.pressed(Key.SPACE))
+				trace(String(time));
 			
 			super.update();
 		}

@@ -4,7 +4,9 @@
 	import flash.events.Event;
 	import net.flashpunk.*;
 	import net.flashpunk.FP;
-	import worlds.ParticleWorld;
+	import net.flashpunk.utils.Input;
+	import worlds.*;
+	import flash.ui.Mouse;
 	[SWF(height = '600', width = '800')]
 	
 	public class Main extends Engine
@@ -15,7 +17,8 @@
 			FP.screen.scale = 1;
 			FP.screen.color = 0x000000;
 			//FP.console.enable();
-			FP.world = new ParticleWorld();
+			FP.world = new Menu;
+			Mouse.hide();
 		}
 	}
 	
