@@ -28,19 +28,23 @@ package entities
 		{
 			if (Input.check(Key.D))
 			{
-				x += speed * FP.elapsed;
+				if (x < 790)
+					x += speed * FP.elapsed;
 			}
 			if (Input.check(Key.A))
 			{
-				x -= speed * FP.elapsed;
+				if (x > 0)
+					x -= speed * FP.elapsed;
 			}
 			if (Input.check(Key.W))
 			{
-				y -= speed * FP.elapsed;
+				if (y > 0)
+					y -= speed * FP.elapsed;
 			}
 			if (Input.check(Key.S))
 			{
-				y += speed * FP.elapsed;
+				if (y < 590)
+					y += speed * FP.elapsed;
 			}
 			
 			if (Input.mousePressed)

@@ -31,17 +31,15 @@ package worlds
 		private var _swarmArray:Array;
 		private var _swarmTimings:Array;
 		private var _currSwarm:Number;
-		
 		private var _timing:Timing;
-		
 		private var _eye:Eye;
-		
 		public var time:Number;
-		
 		private var reticle:Reticle;
+		private var once:Boolean;
 		
 		public function ParticleWorld() 
 		{	
+			once = true;
 			_eye = new Eye();
 			add(_eye);
 			
@@ -81,7 +79,7 @@ package worlds
 			//_swarmArray.push(_swarm);
 			
 			var music:Sound = new MUSIC();
-			channel = music.play(0, 1);
+			channel = music.play(140000, 1);
 		}
 		
 		override public function update():void
@@ -90,8 +88,14 @@ package worlds
 			// Grand finale code
 			if (time > 154200)
 			{
-				this.remove(_player);
-				_eye.startOpening();
+				// stupid boolean to keep track of just executing this code
+				// once when we initialize the sequence
+				if (once) {
+					this.remove(reticle);
+					this.remove(_player);
+					_eye.add();
+					once = false;
+				}
 				_topSineWave.increaseAmp();
 				_bottomSineWave.increaseAmp();
 				_topSineWave.changeYoffset(.1);
