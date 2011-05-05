@@ -19,7 +19,6 @@ package worlds
 		private const MUSIC:Class;
 		public static var channel:SoundChannel;
 		
-		private var timerdisplay:TimeDisplay;
 		private var _player:Player;
 		
 		private var _waitingSource:Array;
@@ -73,13 +72,8 @@ package worlds
 			_topSineWave.init();
 			_bottomSineWave.init();
 			
-			timerdisplay = new TimeDisplay(time);
-			add(timerdisplay);
-			
-			//_swarmArray.push(_swarm);
-			
 			var music:Sound = new MUSIC();
-			channel = music.play(140000, 1);
+			channel = music.play(0, 1);
 		}
 		
 		override public function update():void
